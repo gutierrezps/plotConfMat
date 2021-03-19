@@ -7,13 +7,11 @@ if you do not have the Neural Network Toolbox. Compatible with GNU Octave.
 Usage:
 
 ```matlab
-plotConfMat(confmat)
+plotConfMat(confmat, labels, fontsize)
 ```
 
-Or, if you want to specify the class labels:
-
-```matlab
-plotConfMat(confmat, labels)
-```
+- `confmat` (required): confusion matrix
+- `labels`: class labels (e.g. `{'Dog', 'Cat'}`) (default: `{'1', '2', ...}`)
+- `fontsize`: to be used in plot texts (default: 14)
 
 [plotconfusion]: https://uk.mathworks.com/help/nnet/ref/plotconfusion.html
