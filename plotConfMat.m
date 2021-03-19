@@ -58,18 +58,28 @@ if grayscale
     colormap(flipud(gray));
 else
     % scikit-learn confusion matrix colors (dark-blue, blue, white)
-    confusionColors = [
+    confColors = [
         0.03 0.19 0.42;     % 100%
         0.29 0.60 0.79;     % 60%
         1.00 1.00 1.00      % 0%
     ];
 
-    confusionColorMap = [
-        linspace(confusionColors(1,:), confusionColors(2, :), 25)';
-        linspace(confusionColors(2,:), confusionColors(3, :), 64 - 25)';
-    ];
+    confColorMap = zeros(64, 3);
+    colorPts = int8([0.4 0.6] .* 64);
 
-    colormap(flipud(confusionColorMap));
+    for i = 1:2
+        colors = zeros(colorPts(i), 3);
+        for j = 1:3
+            colors(:, j) = linspace(confColors(i, j), confColors(i+1, j), colorPts(i))';
+        end
+        if i == 1
+            confColorMap(1:colorPts(1), :) = colors;
+        else
+            confColorMap(colorPts(1)+1:64, :) = colors;
+        end
+    end
+
+    colormap(flipud(confColorMap));
 end
 
 % Create strings from the matrix values and remove spaces
