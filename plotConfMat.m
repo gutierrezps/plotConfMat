@@ -10,12 +10,14 @@ function plotConfMat(varargin)
 %   19-march-2021
 %
 %   Arguments
-%   confmat:            a square confusion matrix
-%   labels (optional):  vector of class labels
-%   fontsize (optional): to be used on plot texts (default is 14)
+%   confmat (required): a square confusion matrix
+%   labels:     vector of class labels
+%   fontsize:   to be used on plot texts (default is 14)
+%   grayscale:  if true, use grayscale colors (default is false, blue colors)
 
 % default arguments
 fontsize = 14;
+grayscale = false;
 
 % number of arguments
 switch (nargin)
@@ -28,10 +30,15 @@ switch (nargin)
     case 2
         confmat = varargin{1};
         labels = varargin{2};
+    case 3
+        confmat = varargin{1};
+        labels = varargin{2};
+        fontsize = varargin{3};
     otherwise
         confmat = varargin{1};
         labels = varargin{2};
         fontsize = varargin{3};
+        grayscale = varargin{4} == true;
 end
 
 confmat(isnan(confmat))=0; % in case there are NaN elements
@@ -47,7 +54,23 @@ ylabel('Output Class'); xlabel('Target Class');
 set(gca, 'FontSize', fontsize);
 
 % set the colormap
-colormap(flipud(gray));
+if grayscale
+    colormap(flipud(gray));
+else
+    % scikit-learn confusion matrix colors (dark-blue, blue, white)
+    confusionColors = [
+        0.03 0.19 0.42;     % 100%
+        0.29 0.60 0.79;     % 60%
+        1.00 1.00 1.00      % 0%
+    ];
+
+    confusionColorMap = [
+        linspace(confusionColors(1,:), confusionColors(2, :), 25)';
+        linspace(confusionColors(2,:), confusionColors(3, :), 64 - 25)';
+    ];
+
+    colormap(flipud(confusionColorMap));
+end
 
 % Create strings from the matrix values and remove spaces
 textStrings = num2str([confpercent(:), confmat(:)], '%.1f%% (%d)\n');
