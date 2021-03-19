@@ -6,8 +6,8 @@ function plotConfMat(varargin)
 %   PLOTCONFMAT(confmat) plots the confmat with integers 1 to n as class labels
 %   PLOTCONFMAT(confmat, labels) plots the confmat with the specified labels
 %
-%   Vahe Tshitoyan
-%   20/08/2017
+%   Vahe Tshitoyan, Gutierrez PS
+%   19-march-2021
 %
 %   Arguments
 %   confmat:            a square confusion matrix
@@ -41,7 +41,7 @@ ylabel('Output Class'); xlabel('Target Class');
 colormap(flipud(gray));
 
 % Create strings from the matrix values and remove spaces
-textStrings = num2str([confpercent(:), confmat(:)], '%.1f%%\n%d\n');
+textStrings = num2str([confpercent(:), confmat(:)], '%.1f%% (%d)\n');
 textStrings = strtrim(cellstr(textStrings));
 
 % Create x and y coordinates for the strings and plot them
@@ -54,8 +54,10 @@ midValue = mean(get(gca,'CLim'));
 
 % Choose white or black for the text color of the strings so
 % they can be easily seen over the background color
-textColors = repmat(confpercent(:) > midValue,1,3);
-set(hStrings,{'Color'},num2cell(textColors,2));
+textColors = double(repmat(confpercent(:) > midValue,1,3));
+for i = 1:length(hStrings)
+    set(hStrings(i),'Color', double(textColors(i,:)));
+end
 
 % Setting the axis labels
 set(gca,'XTick',1:numlabels,...
