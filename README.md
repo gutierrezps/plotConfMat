@@ -1,14 +1,19 @@
 # plotConfMat
-Plots a confusion matrix with colorscale, absolute numbers and precision normalized percentages. 
-This is a basic alternative to matlab's [plotconfusion](https://uk.mathworks.com/help/nnet/ref/plotconfusion.html) if you do not
-have the Neural Network Toolbox.
 
-usage:
+Plots a confusion matrix with colorscale, absolute numbers and precision
+normalized percentages. This is a basic alternative to MATLAB's [plotconfusion]
+if you do not have the Neural Network Toolbox. Compatible with GNU Octave.
+
+Usage:
+
 ```matlab
 plotConfMat(confmat)
 ```
-or
+
+Or, if you want to specify the class labels:
+
 ```matlab
 plotConfMat(confmat, labels)
 ```
-if you want to specify the class labels.
+
+[plotconfusion]: https://uk.mathworks.com/help/nnet/ref/plotconfusion.html
