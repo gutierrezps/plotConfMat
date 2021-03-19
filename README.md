@@ -4,6 +4,8 @@ Plots a confusion matrix with colorscale, absolute numbers and precision
 normalized percentages. This is a basic alternative to MATLAB's [plotconfusion]
 if you do not have the Neural Network Toolbox. Compatible with GNU Octave.
 
+![Confusion matrix plot using this library](example.png)
+
 Usage:
 
 ```matlab
