@@ -51,7 +51,6 @@ confpercent = 100*confmat./repmat(sum(confmat, 1),numlabels,1);
 imagesc(confpercent);
 title(sprintf('Accuracy: %.2f%%', 100*trace(confmat)/sum(confmat(:))));
 ylabel('Output Class'); xlabel('Target Class');
-set(gca, 'FontSize', fontsize);
 
 % set the colormap
 if grayscale
@@ -101,10 +100,16 @@ for i = 1:length(hStrings)
     set(hStrings(i),'Color', textColors(i,:));
 end
 
-% Setting the axis labels
+% Setting the axis labels and font size
 set(gca,'XTick',1:numlabels,...
     'XTickLabel',labels,...
     'YTick',1:numlabels,...
     'YTickLabel',labels,...
-    'TickLength',[0 0]);
+    'TickLength',[0 0],...
+    'FontSize', 18);
+
+% add colorbar
+h = colorbar;
+set(h, 'FontSize', fontsize);
+
 end
