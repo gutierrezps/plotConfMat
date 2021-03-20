@@ -14,6 +14,8 @@ function plotConfMat(varargin)
 %   labels:     vector of class labels
 %   fontsize:   to be used on plot texts (default is 14)
 %   grayscale:  if true, use grayscale colors (default is false, blue colors)
+%
+%   Source: https://github.com/gutierrezps/plotConfMat
 
 % default arguments
 fontsize = 14;
